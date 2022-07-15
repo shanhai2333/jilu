@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xie.jilu.mapper.RecordMapper">
+    <insert id="addRecord">
+        INSERT INTO
+            jilu (record , allrecord ,date)
+        VALUES
+            (#{record} ,#{allrecord} ,#{date})
+    </insert>
+    <update id="updateAllRecord">
+        UPDATE
+            jilu
+        SET
+            allrecord = #{allrecord}
+        WHERE
+            id = #{id}
+    </update>
+    <delete id="deleteLastRecord">
+        DELETE FROM
+            jilu
+        WHERE
+            id = #{id}
+    </delete>
+    <select id="findAll" resultType="com.xie.jilu.entity.Record">
+        SELECT
+            *
+        FROM
+            jilu
+    </select>
+    <select id="findLastRecord" resultType="com.xie.jilu.entity.Record">
+        SELECT
+            *
+        FROM
+            jilu
+        ORDER BY
+            id DESC
+        LIMIT
+            1
+    </select>
+</mapper>
