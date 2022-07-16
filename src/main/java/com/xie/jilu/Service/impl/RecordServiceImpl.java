@@ -88,6 +88,10 @@ public class RecordServiceImpl implements RecordService {
         return records;
     }
 
+    /**
+     * 查询今日数据
+     * @return List<Record> 今日的数据
+     */
     @Override
     public List<Record> findToDayRecord() {
         Record record = recordMapper.findLastRecord();
@@ -98,18 +102,47 @@ public class RecordServiceImpl implements RecordService {
         return records;
     }
 
-    @Override
-    public List<Record> findYesterdayRecord() {
-        return null;
-    }
+    /**
+     * 查询昨日数据
+     * @return List<Record> 昨日的数据
+     */
 
     @Override
-    public List<Record> findMonthRecord() {
-        return null;
+    public List<Record> findYesterdayRecord() {
+        Record record = recordMapper.findLastRecord();
+        if (record == null) {
+            throw new RecordNotFoundException("查询失败");
+        }
+        List<Record> records = recordMapper.findYesterdayRecord();
+        return records;
     }
+
+    /**
+     * 查询本月数据
+     * @return List<Record> 本月的数据
+     */
+    @Override
+    public List<Record> findMonthRecord() {
+        Record record = recordMapper.findLastRecord();
+        if (record == null) {
+            throw new RecordNotFoundException("查询失败");
+        }
+        List<Record> records = recordMapper.findMonthRecord();
+        return records;
+    }
+
+    /**
+     * 查询年度数据
+     * @return List<Record> 年度的数据
+     */
 
     @Override
     public List<Record> findYearRecord() {
-        return null;
+        Record record = recordMapper.findLastRecord();
+        if (record == null) {
+            throw new RecordNotFoundException("查询失败");
+        }
+        List<Record> records = recordMapper.findYearRecord();
+        return records;
     }
 }
