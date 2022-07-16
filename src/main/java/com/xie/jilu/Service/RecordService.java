@@ -11,29 +11,30 @@ import java.util.List;
 public interface RecordService {
     /**
      * 查询所有记录
-     * @return
+     * @return List<Record>
      */
     List<Record> findAll();
 
     /**
      * 增加记录
-     *
-     * @return
      */
     void addRecord();
 
     /**
      * 查询最近一次记录
-     *
-     * @return
+     * @return Record 最近一次记录
      */
     Record findLastRecord();
 
     /**
      * 根据查询最近一次记录，删除最近一次记录
-     * @param id 最近一次记录的id
-     * @return
      */
     void deleteLastRecord();
+
+    /**
+     * 查询一周内的记录
+     * @return List<Record> 一周内的记录
+     */
+    List<Record> findWeekRecord();
 
 }

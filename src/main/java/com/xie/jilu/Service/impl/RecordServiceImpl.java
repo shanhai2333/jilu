@@ -1,6 +1,7 @@
 package com.xie.jilu.Service.impl;
 
 import com.xie.jilu.Service.RecordService;
+import com.xie.jilu.Service.ex.RecordAddException;
 import com.xie.jilu.Service.ex.RecordNotFoundException;
 import com.xie.jilu.entity.Record;
 import com.xie.jilu.mapper.RecordMapper;
@@ -35,8 +36,6 @@ public class RecordServiceImpl implements RecordService {
         Record result = recordMapper.findLastRecord();
         if (result != null) {
             allrecord = result.getAllrecord();
-        }else if (result == null) {
-            allrecord = 0;
         }
         allrecord++;
         Integer result1 = recordMapper.addRecord(record, allrecord, new Date());
@@ -58,14 +57,34 @@ public class RecordServiceImpl implements RecordService {
     @Override
     public void deleteLastRecord() {
         Record record = recordMapper.findLastRecord();
+        if (record == null) {
+            throw new RecordNotFoundException("该用户没有任何记录");
+        }
         Integer id = record.getId();
         Integer result = recordMapper.deleteLastRecord(id);
         if (result != 1) {
-            throw new RecordNotFoundException("删除失败");
+            throw new RecordAddException("删除失败");
         }
 
 
     }
 
+    /**
+     * 查询一周内的所有数据
+     * @return List<Record> 一周的数据
+     */
+    @Override
+    public List<Record> findWeekRecord() {
+        Record record = recordMapper.findLastRecord();
+        if (record == null) {
+            throw new RecordNotFoundException("该用户没有任何记录");
+        }
 
+        List<Record> records = recordMapper.findAll();
+        if (records == null) {
+            throw new RecordNotFoundException("查询失败");
+        }
+
+        return records;
+    }
 }
