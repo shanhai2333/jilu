@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,30 +22,30 @@ public class RecordController {
     @RequestMapping("/findAll")
     public JsonResult<List<Record>> findAll() {
         List<Record> list = recordService.findAll();
-        return new JsonResult<List<Record>>(200,list);
+        return new JsonResult<>(200,list);
     }
 
     @RequestMapping("/addRecord")
     public JsonResult<String> addRecord() {
         recordService.addRecord();
-        return new JsonResult<String>(200,"添加成功!");
+        return new JsonResult<>(200,"添加成功!");
     }
 
     @RequestMapping("/findLastRecord")
     public JsonResult<Record> findLastRecord() {
         Record record = recordService.findLastRecord();
-        return new JsonResult<Record>(200,record);
+        return new JsonResult<>(200,record);
     }
 
     @RequestMapping("/deleteLastRecord")
     public JsonResult<String> deleteLastRecord() {
         recordService.deleteLastRecord();
-        return new JsonResult<String>(200,"删除成功!");
+        return new JsonResult<>(200,"删除成功!");
     }
 
     @RequestMapping("/allRecord")
-    public JsonResult<Integer> AllRecord() {
+    public JsonResult<Integer> allRecord() {
         Integer record = recordService.findLastRecord().getAllrecord();
-        return new JsonResult<Integer>(200,record);
+        return new JsonResult<>(200,record);
     }
 }

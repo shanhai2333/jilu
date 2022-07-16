@@ -87,4 +87,29 @@ public class RecordServiceImpl implements RecordService {
 
         return records;
     }
+
+    @Override
+    public List<Record> findToDayRecord() {
+        Record record = recordMapper.findLastRecord();
+        if (record == null) {
+            throw new RecordNotFoundException("查询失败");
+        }
+        List<Record> records = recordMapper.findToDayRecord();
+        return records;
+    }
+
+    @Override
+    public List<Record> findYesterdayRecord() {
+        return null;
+    }
+
+    @Override
+    public List<Record> findMonthRecord() {
+        return null;
+    }
+
+    @Override
+    public List<Record> findYearRecord() {
+        return null;
+    }
 }
