@@ -19,33 +19,55 @@ public class RecordController {
     @Autowired
     private RecordService recordService;
 
+    /**
+     * 查询所有记录
+     * @return JsonResult<List<Record>> 所有记录
+     */
     @RequestMapping("/findAll")
     public JsonResult<List<Record>> findAll() {
         List<Record> list = recordService.findAll();
         return new JsonResult<>(200,list);
     }
 
+    /**
+     * 增加记录
+     * @return JsonResult<List<Record>> 返回结果
+     */
     @RequestMapping("/addRecord")
     public JsonResult<String> addRecord() {
         recordService.addRecord();
         return new JsonResult<>(200,"添加成功!");
     }
 
+    /**
+     * 查询最后一条记录
+     * @return JsonResult<Record> 最后一条记录
+     */
     @RequestMapping("/findLastRecord")
     public JsonResult<Record> findLastRecord() {
         Record record = recordService.findLastRecord();
         return new JsonResult<>(200,record);
     }
 
+    /**
+     * 删除最后一条记录
+     * @return JsonResult<String> 返回结果
+     */
     @RequestMapping("/deleteLastRecord")
     public JsonResult<String> deleteLastRecord() {
         recordService.deleteLastRecord();
         return new JsonResult<>(200,"删除成功!");
     }
 
+    /**
+     * 查询所有记录
+     * @return JsonResult<List<Record>> 所有记录
+     */
     @RequestMapping("/allRecord")
     public JsonResult<Integer> allRecord() {
         Integer record = recordService.findLastRecord().getAllrecord();
         return new JsonResult<>(200,record);
     }
+
+
 }
