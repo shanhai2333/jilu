@@ -1,6 +1,7 @@
 package com.xie.jilu.controller;
 
 import com.xie.jilu.Service.RecordService;
+import com.xie.jilu.Service.ex.RecordNotFoundException;
 import com.xie.jilu.entity.Record;
 import com.xie.jilu.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,52 @@ public class RecordController {
     public JsonResult<Integer> allRecord() {
         Integer record = recordService.findLastRecord().getAllrecord();
         return new JsonResult<>(200,record);
+    }
+
+    /**
+     * 查询今日所有数据
+     * @return
+     */
+    @RequestMapping("/todayRecord")
+    public JsonResult<List<Record>> todayRecord() {
+        List<Record> list = recordService.findTodayRecord();
+        return new JsonResult<>(200,list);
+    }
+
+    /**
+     * 查询昨日所有数据
+     */
+    @RequestMapping("/yesterdayRecord")
+    public JsonResult<List<Record>> yesterdayRecord() {
+        List<Record> list = recordService.findYesterdayRecord();
+        return new JsonResult<>(200,list);
+    }
+
+    /**
+     * 查询本周所有数据
+     */
+    @RequestMapping("/weekRecord")
+    public JsonResult<List<Record>> weekRecord() {
+        List<Record> list = recordService.findWeekRecord();
+        return new JsonResult<>(200,list);
+    }
+
+    /**
+     * 查询本月所有数据
+     */
+    @RequestMapping("/monthRecord")
+    public JsonResult<List<Record>> monthRecord() {
+        List<Record> list = recordService.findMonthRecord();
+        return new JsonResult<>(200,list);
+    }
+
+    /**
+     * 查询本年所有数据
+     */
+    @RequestMapping("/yearRecord")
+    public JsonResult<List<Record>> yearRecord() {
+        List<Record> list = recordService.findYearRecord();
+        return new JsonResult<>(200,list);
     }
 
 

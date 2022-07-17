@@ -35,7 +35,7 @@ public interface RecordService {
      * 查询今天数据
      * @return List<Record> 今天的数据
      */
-    List<Record> findToDayRecord();
+    List<Record> findTodayRecord();
 
     /**
      * 查询昨天数据

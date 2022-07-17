@@ -93,12 +93,15 @@ public class RecordServiceImpl implements RecordService {
      * @return List<Record> 今日的数据
      */
     @Override
-    public List<Record> findToDayRecord() {
-        Record record = recordMapper.findLastRecord();
-        if (record == null) {
-            throw new RecordNotFoundException("查询失败");
-        }
+    public List<Record> findTodayRecord() {
         List<Record> records = recordMapper.findToDayRecord();
+        if (records.size() == 0) {
+            throw new RecordNotFoundException("查询失败");
+        } else {
+            for (Record record : records){
+                record.setAllrecord(null);
+            }
+        }
         return records;
     }
 
